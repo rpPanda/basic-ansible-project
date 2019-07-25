@@ -1,6 +1,12 @@
 ---
 
-  - name: Install nginx
-    hosts: root@9.30.194.94
+  - name: Move a file
+    hosts: remote
     roles:
       - common
+
+
+  - name: Install ansible
+    hosts: all
+    roles:
+      - nginx
