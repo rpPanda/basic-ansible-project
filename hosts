@@ -1,0 +1,4 @@
+[remote]
+remote-server-1 ansible_host=root@9.30.194.94 ansible_ssh_pass={{ssh_pass}}
+  [local]
+  localhost ansible_connection=local

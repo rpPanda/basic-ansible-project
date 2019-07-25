@@ -1,0 +1,17 @@
+---
+  - name: Test my role
+    gather_facts: false
+    hosts: all
+    roles:
+      - common
+    vars:
+      list1:
+        - 1
+        - [2,3]
+        - 4
+
+
+  # - name: Install nginx
+  #   hosts: remote
+  #   roles:
+  #     - nginx
