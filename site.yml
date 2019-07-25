@@ -1,6 +1,6 @@
 ---
 
   - name: Install nginx
-    hosts: remote
+    hosts: localhost
     roles:
-      - nginx
+      - common
