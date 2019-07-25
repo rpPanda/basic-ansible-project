@@ -1,6 +1,6 @@
 ---
 
   - name: Install nginx
-    hosts: remote
+    hosts: root@9.30.194.94
     roles:
       - common
