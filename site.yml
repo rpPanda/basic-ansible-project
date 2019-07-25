@@ -1,12 +1,12 @@
 ---
 
   - name: Move a file
-    hosts: remote
+    hosts: all
     roles:
       - common
 
 
   - name: Install ansible
-    hosts: all
+    hosts: remote
     roles:
       - nginx
