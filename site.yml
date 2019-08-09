@@ -6,7 +6,7 @@
       - common
 
 
-  - name: Install ansible
+  - name: Install apache
     hosts: remote
     roles:
-      - nginx
+      - ansible-role-apache
