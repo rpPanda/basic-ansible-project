@@ -9,4 +9,4 @@
   - name: Install apache
     hosts: remote
     roles:
-      - ansible-role-apache
+      - apache
