@@ -6,7 +6,7 @@
       - common
 
 
-  - name: Install apache
-    hosts: all
-    roles:
-      - apache
+#   - name: Install apache
+#     hosts: all
+#     roles:
+#       - apache
