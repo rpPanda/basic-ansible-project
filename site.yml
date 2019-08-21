@@ -1,7 +1,7 @@
 ---
 
   - name: Move a file
-    hosts: root@9.30.210.91
+    hosts: all
     roles:
       - common
 
