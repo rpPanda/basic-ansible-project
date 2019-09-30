@@ -1,10 +1,14 @@
 ---
 
+  - name: Copy params
+    hosts: parameters
+    roles:
+      - remotecopy
+
   - name: Move a file
     hosts: all
     roles:
       - common
-
 
 #   - name: Install apache
 #     hosts: all

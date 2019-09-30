@@ -1,0 +1,6 @@
+---
+  - name: Copy parameters
+    fetch:
+      src: ~/params.yml
+      dest: vars/
+      # flat: yes
