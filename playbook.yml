@@ -1,0 +1,91 @@
+# This playbook requires privilege escalation to be set. Please
+# refer the ansible.cfg in current working directory for privilege_escalation
+# configuration.
+
+- name: Deploy a web application
+  tasks:
+    - name: Install all required dependencies
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - "epel-release"
+        - "python"
+        - "python-devel"
+      become: yes
+
+    - name: Install MySQL community repository
+      yum:
+        name: "http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm"
+        state: present
+
+    - name: Install MySQL database
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - "mysql-server"
+        - "mysql-devel"
+      become: yes
+
+    - name: create MySQL configuration file
+      copy:
+        content: |
+          [client]
+          user=root
+          password="@targ8et"
+        dest: "/etc/.my.cnf"
+      become: yes
+
+    - name: Start MySQL Service
+      service:
+        name: mysqld
+        state: started
+        enabled: yes
+      become: yes
+
+    - name: Install mysql-python package
+      yum:
+        name: MySQL-python
+        state: present
+      become: yes
+
+    - name: Install pip
+      yum:
+        name: "python-pip"
+        state: present
+      become: yes
+
+    - name: Install required Python libraries
+      pip:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - "flask"
+        - "flask-mysql"
+      become: yes
+
+    - name: Create Application Database
+      mysql_db:
+        name: employee_db
+        state: present
+      become: yes
+
+    - name: Create Database user
+      mysql_user:
+        name: db_user
+        password: Passw0rd
+        priv: '*.*:ALL'
+        state: present
+      become: yes
+
+    - name: Copy source code
+      git:
+        repo: ssh://git@github.com:amitabhprasad/ansibleplaybook.git
+        dest: /opt/app.py
+        update: yes
+      become: yes
+
+    - name: Start web server
+      shell: FLASK_APP=/opt/app.py nohup flask run --host=0.0.0.0 &
+      become: yes
